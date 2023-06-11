@@ -30,3 +30,5 @@ class Component {
   }
   updated() {}
 }
+
+export default Component;
