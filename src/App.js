@@ -1,4 +1,4 @@
-import Component from "./src/core/Component";
+import Component from "./core/Component";
 
 class App extends Component {
   setup() {
