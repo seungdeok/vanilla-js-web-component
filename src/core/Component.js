@@ -16,14 +16,16 @@ class Component {
   mounted() {}
   setState(newState) {
     let isRerender = false;
-    for (const key in Object.keys(newState)) {
-      if (this.state[key] === newState[key]) continue;
-      isRerender = true;
+    for (const key of Object.keys(newState)) {
+      if (this.state[key] !== newState[key]) {
+        isRerender = true;
+        break;
+      }
     }
 
     if (!isRerender) return;
 
-    this.state = { ...this.state, newState };
+    this.state = { ...this.state, ...newState };
     this.render();
     this.mounted();
     this.updated();

@@ -4,7 +4,7 @@ import getUniqueId from "./utils/getUniqueId";
 
 class App extends Component {
   setup() {
-    this.state = { data: [], text: "" };
+    this.state = { data: [] };
   }
 
   template() {
@@ -17,17 +17,16 @@ class App extends Component {
   }
 
   mounted() {
-    const { addItem, handleTextChange } = this;
+    const { addItem } = this;
     const inputFormWrap = document.querySelector(".input-form-wrap");
 
     new InputForm(inputFormWrap, {
       addItem: addItem.bind(this),
-      onchange: handleTextChange.bind(this),
     });
   }
 
-  addItem() {
-    const { text, data } = this.state;
+  addItem(value) {
+    const { data } = this.state;
     const id = getUniqueId();
 
     this.setState({
@@ -35,15 +34,9 @@ class App extends Component {
         ...data,
         {
           id,
-          text,
+          text: value,
         },
       ],
-    });
-  }
-
-  handleTextChange(value) {
-    this.setState({
-      text: value,
     });
   }
 }
