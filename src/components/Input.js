@@ -8,12 +8,14 @@ class Input extends Component {
   }
 
   mounted() {
-    const { addItem } = this.props;
-    document.querySelector(".input").addEventListener(
+    const { onkeyup } = this.props;
+    const textInput = document.querySelector(".input");
+
+    textInput.addEventListener(
       "keyup",
       ({ key, target }) => {
         if (key !== "Enter") return;
-        addItem(target.value);
+        onkeyup(target.value);
       },
       false
     );

@@ -1,15 +1,15 @@
 import Component from "./core/Component";
-import Input from "./components/Input";
+import InputForm from "./components/InputForm";
 
 class App extends Component {
   setup() {
-    this.state = { data: [] };
+    this.state = { data: [], text: "" };
   }
 
   template() {
     return `
       <div>
-        <div class="input-wrap"></div>
+        <div class="input-form-wrap"></div>
         <div class="content-wrap"></div>
       </div>
     `;
@@ -17,9 +17,9 @@ class App extends Component {
 
   mounted() {
     const { addItem } = this;
-    const inputWrap = document.querySelector(".input-wrap");
+    const inputFormWrap = document.querySelector(".input-form-wrap");
 
-    new Input(inputWrap, {
+    new InputForm(inputFormWrap, {
       addItem: addItem.bind(this),
     });
   }
