@@ -14,7 +14,7 @@ class Component {
     this.target.innerHTML = this.template();
   }
   mounted() {}
-  setState(newState) {
+  setState(newState, shouldUpdate = true) {
     let isRerender = false;
     for (const key of Object.keys(newState)) {
       if (this.state[key] !== newState[key]) {
@@ -26,9 +26,12 @@ class Component {
     if (!isRerender) return;
 
     this.state = { ...this.state, ...newState };
-    this.render();
-    this.mounted();
-    this.updated();
+
+    if (shouldUpdate) {
+      this.render();
+      this.mounted();
+      this.updated();
+    }
   }
   updated() {}
 }

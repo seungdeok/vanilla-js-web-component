@@ -13,12 +13,13 @@ class InputForm extends Component {
   }
 
   mounted() {
-    const { addItem } = this.props;
+    const { addItem, changeText } = this.props;
     const inputWrap = document.querySelector(".input-wrap");
     const buttonWrap = document.querySelector(".button-wrap");
 
     new Input(inputWrap, {
       onkeyup: addItem,
+      onchange: changeText,
     });
 
     new Button(buttonWrap, {
