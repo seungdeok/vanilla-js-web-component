@@ -1,6 +1,6 @@
-import Component from "../core/Component";
-import Input from "./Input";
-import Button from "./Button";
+import Component from "../core/Component.js";
+import Input from "./Input.js";
+import Button from "./Button.js";
 
 class InputForm extends Component {
   template() {
