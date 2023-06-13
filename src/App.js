@@ -2,6 +2,7 @@ import Component from "./core/Component.js";
 import InputForm from "./components/InputForm.js";
 import getUniqueId from "./utils/getUniqueId.js";
 import TodoList from "./components/TodoList.js";
+import localstorage from "./utils/localstorage.js";
 
 class App extends Component {
   setup() {
@@ -21,6 +22,16 @@ class App extends Component {
     const { addItem, removeItem, changeText } = this;
     const inputFormWrap = document.querySelector(".input-form-wrap");
     const contentWrap = document.querySelector(".content-wrap");
+
+    window.onload = (event) => {
+      const list = localstorage.get("data");
+
+      if (list) {
+        this.setState({
+          data: list,
+        });
+      }
+    };
 
     new InputForm(inputFormWrap, {
       changeText: changeText.bind(this),
@@ -63,6 +74,11 @@ class App extends Component {
     this.setState({
       data: data.filter((item) => item.id !== id),
     });
+  }
+
+  updated() {
+    const { data } = this.state;
+    localstorage.set("data", data);
   }
 }
 
