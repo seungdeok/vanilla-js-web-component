@@ -3,7 +3,7 @@ import Component from "../core/Component.js";
 class Input extends Component {
   template() {
     return `
-      <input type="text" placeholder="텍스트 입력" class="input" />
+      <input type="text" placeholder="텍스트 입력" autofocus class="input" />
     `;
   }
 
