@@ -1,6 +1,6 @@
-import Component from "./core/Component";
-import InputForm from "./components/InputForm";
-import getUniqueId from "./utils/getUniqueId";
+import Component from "./core/Component.js";
+import InputForm from "./components/InputForm.js";
+import getUniqueId from "./utils/getUniqueId.js";
 
 class App extends Component {
   setup() {
