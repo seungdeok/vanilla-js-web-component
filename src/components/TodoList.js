@@ -8,7 +8,10 @@ class TodoList extends Component {
         ${data
           .map(
             (item) => `
-          <li key='${item.id}'>${item.text}</li>
+          <li key='${item.id}'>
+            <div>${item.text}</div>
+            <button>삭제</button>
+          </li>
         `
           )
           .join("")}
