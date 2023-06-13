@@ -5,7 +5,7 @@ import TodoList from "./components/TodoList.js";
 
 class App extends Component {
   setup() {
-    this.state = { data: [] };
+    this.state = { data: [], text: "" };
   }
 
   template() {
@@ -18,11 +18,12 @@ class App extends Component {
   }
 
   mounted() {
-    const { addItem, removeItem } = this;
+    const { addItem, removeItem, changeText } = this;
     const inputFormWrap = document.querySelector(".input-form-wrap");
     const contentWrap = document.querySelector(".content-wrap");
 
     new InputForm(inputFormWrap, {
+      changeText: changeText.bind(this),
       addItem: addItem.bind(this),
     });
 
@@ -32,8 +33,17 @@ class App extends Component {
     });
   }
 
-  addItem(value) {
-    const { data } = this.state;
+  changeText(value) {
+    this.setState(
+      {
+        text: value,
+      },
+      false
+    );
+  }
+
+  addItem() {
+    const { data, text } = this.state;
     const id = getUniqueId();
 
     this.setState({
@@ -41,7 +51,7 @@ class App extends Component {
         ...data,
         {
           id,
-          text: value,
+          text,
         },
       ],
     });
