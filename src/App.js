@@ -18,7 +18,7 @@ class App extends Component {
   }
 
   mounted() {
-    const { addItem } = this;
+    const { addItem, removeItem } = this;
     const inputFormWrap = document.querySelector(".input-form-wrap");
     const contentWrap = document.querySelector(".content-wrap");
 
@@ -28,6 +28,7 @@ class App extends Component {
 
     new TodoList(contentWrap, {
       data: this.state.data,
+      removeItem: removeItem.bind(this),
     });
   }
 
@@ -43,6 +44,14 @@ class App extends Component {
           text: value,
         },
       ],
+    });
+  }
+
+  removeItem(id) {
+    const { data } = this.state;
+
+    this.setState({
+      data: data.filter((item) => item.id !== id),
     });
   }
 }

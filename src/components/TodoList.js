@@ -4,7 +4,7 @@ class TodoList extends Component {
   template() {
     const { data } = this.props;
     return `
-      <ul>
+      <ul class="list-wrap">
         ${data
           .map(
             (item) => `
@@ -19,7 +19,23 @@ class TodoList extends Component {
     `;
   }
 
-  mounted() {}
+  mounted() {
+    const { removeItem } = this.props;
+    const listWrap = document.querySelectorAll(".list-wrap li");
+
+    for (const item of listWrap) {
+      const button = item.querySelector("button");
+      const key = item.getAttribute("key");
+      button.addEventListener(
+        "click",
+        (e) => {
+          e.preventDefault();
+          removeItem(key);
+        },
+        false
+      );
+    }
+  }
 }
 
 export default TodoList;
