@@ -26,3 +26,8 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text);
 }
+
+ul.list-wrap li {
+  height: 150px;
+  border-bottom: 1px solid lightgrey;
+}

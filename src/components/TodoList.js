@@ -1,4 +1,5 @@
 import Component from "../core/Component.js";
+import intersectionObserver from "../utils/intersectionObserver.js";
 
 class TodoList extends Component {
   template() {
@@ -7,8 +8,10 @@ class TodoList extends Component {
       <ul class="list-wrap">
         ${data
           .map(
-            (item) => `
-          <li key='${item.id}'>
+            (item, idx) => `
+          <li key='${item.id}' class='${
+              idx === data.length - 1 ? "last-item" : ""
+            }'>
             <div>${item.text}</div>
             <button>삭제</button>
           </li>
@@ -35,6 +38,12 @@ class TodoList extends Component {
         false
       );
     }
+
+    intersectionObserver.detectScroll(
+      {},
+      document.querySelectorAll(".last-item"),
+      () => console.log("detect")
+    );
   }
 }
 
