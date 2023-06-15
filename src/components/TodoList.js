@@ -22,21 +22,19 @@ class TodoList extends Component {
     `;
   }
 
-  mounted() {
+  handleClick(e, key) {
     const { removeItem } = this.props;
+    e.preventDefault();
+    removeItem(key);
+  }
+
+  mounted() {
     const listWrap = document.querySelectorAll(".list-wrap li");
 
     for (const item of listWrap) {
       const button = item.querySelector("button");
       const key = item.getAttribute("key");
-      button.addEventListener(
-        "click",
-        (e) => {
-          e.preventDefault();
-          removeItem(key);
-        },
-        false
-      );
+      button.addEventListener("click", (e) => this.handleClick(e, key), false);
     }
 
     intersectionObserver.detectScroll(
@@ -44,6 +42,16 @@ class TodoList extends Component {
       document.querySelectorAll(".last-item"),
       () => console.log("detect")
     );
+  }
+
+  unmount() {
+    const listWrap = document.querySelectorAll(".list-wrap li");
+
+    for (const item of listWrap) {
+      const button = item.querySelector("button");
+      const key = item.getAttribute("key");
+      button.removeEventListener("click", (e) => this.handleClick(e, key));
+    }
   }
 }
 
