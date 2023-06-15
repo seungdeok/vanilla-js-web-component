@@ -1,17 +1,25 @@
 import Component from "./core/Component.js";
 import InputForm from "./components/InputForm.js";
-import getUniqueId from "./utils/getUniqueId.js";
 import TodoList from "./components/TodoList.js";
+import Button from "./components/Button.js";
+import getUniqueId from "./utils/getUniqueId.js";
 import localstorage from "./utils/localstorage.js";
 
 class App extends Component {
   setup() {
-    this.state = { data: [], text: "" };
+    this.state = {
+      data: [],
+      text: "",
+      isDarkMode: window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? true
+        : false,
+    };
   }
 
   template() {
     return `
       <div>
+        <div class="toggle-wrap"></div>
         <div class="input-form-wrap"></div>
         <div class="content-wrap"></div>
       </div>
@@ -19,7 +27,9 @@ class App extends Component {
   }
 
   mounted() {
-    const { addItem, removeItem, changeText } = this;
+    const { isDarkMode } = this.state;
+    const { addItem, removeItem, changeText, changeTheme } = this;
+    const toggleWrap = document.querySelector(".toggle-wrap");
     const inputFormWrap = document.querySelector(".input-form-wrap");
     const contentWrap = document.querySelector(".content-wrap");
 
@@ -32,6 +42,12 @@ class App extends Component {
         });
       }
     };
+
+    new Button(toggleWrap, {
+      id: "toggle-button",
+      label: isDarkMode ? "🌙" : "🌞",
+      onclick: changeTheme.bind(this),
+    });
 
     new InputForm(inputFormWrap, {
       changeText: changeText.bind(this),
@@ -66,6 +82,8 @@ class App extends Component {
         },
       ],
     });
+
+    console.log("call");
   }
 
   removeItem(id) {
@@ -79,6 +97,18 @@ class App extends Component {
   updated() {
     const { data } = this.state;
     localstorage.set("data", data);
+  }
+
+  changeTheme() {
+    const { isDarkMode } = this.state;
+    if (!isDarkMode) {
+      document.documentElement.setAttribute("color-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("color-theme", "light");
+    }
+    this.setState({
+      isDarkMode: !isDarkMode,
+    });
   }
 }
 
