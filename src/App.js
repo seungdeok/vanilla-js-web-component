@@ -82,8 +82,6 @@ class App extends Component {
         },
       ],
     });
-
-    console.log("call");
   }
 
   removeItem(id) {
