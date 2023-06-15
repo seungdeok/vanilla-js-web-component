@@ -23,6 +23,7 @@ class InputForm extends Component {
     });
 
     new Button(buttonWrap, {
+      id: "form-button",
       onclick: addItem,
       label: "추가",
     });
