@@ -10,18 +10,23 @@ class Button extends Component {
     `;
   }
 
+  handleClick(e) {
+    const { onclick } = this.props;
+    e.preventDefault();
+    onclick();
+  }
+
   mounted() {
-    const { onclick, id } = this.props;
+    const { id } = this.props;
     const labelButton = document.querySelector(`.button_${id}`);
 
-    labelButton.addEventListener(
-      "click",
-      (e) => {
-        e.preventDefault();
-        onclick();
-      },
-      false
-    );
+    labelButton.addEventListener("click", (e) => this.handleClick(e), false);
+  }
+
+  unmount() {
+    const { id } = this.props;
+    const labelButton = document.querySelector(`.button_${id}`);
+    labelButton.removeEventListener("click", (e) => this.handleClick(e));
   }
 }
 

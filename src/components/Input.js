@@ -8,24 +8,29 @@ class Input extends Component {
     `;
   }
 
-  mounted() {
+  handleChange(e) {
     const { onkeyup, onchange } = this.props;
-    const textInput = document.querySelector(".input");
-
     const debouncedOnChange = debounce((value) => {
       onchange(value);
     });
 
-    textInput.addEventListener(
-      "keyup",
-      ({ key, target }) => {
-        if (key === "Enter") onkeyup();
-        else {
-          debouncedOnChange(target.value);
-        }
-      },
-      false
-    );
+    const { key, target } = e;
+    if (key === "Enter") onkeyup();
+    else {
+      debouncedOnChange(target.value);
+    }
+  }
+
+  mounted() {
+    const textInput = document.querySelector(".input");
+
+    textInput.addEventListener("keyup", (e) => this.handleChange(e), false);
+  }
+
+  unmount() {
+    const textInput = document.querySelector(".input");
+
+    textInput.removeEventListener("keyup", (e) => this.handleChange(e));
   }
 }
 

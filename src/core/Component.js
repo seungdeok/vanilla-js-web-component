@@ -5,6 +5,10 @@ class Component {
     this.setup();
     this.render();
     this.mounted();
+
+    window.onbeforeunload = () => {
+      this.unmount();
+    };
   }
   setup() {}
   template() {
@@ -34,6 +38,7 @@ class Component {
     }
   }
   updated() {}
+  unmount() {}
 }
 
 export default Component;
