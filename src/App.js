@@ -60,6 +60,11 @@ class App extends Component {
     });
   }
 
+  updated() {
+    const { data } = this.state;
+    localstorage.set("data", data);
+  }
+
   changeText(value) {
     this.setState(
       {
@@ -90,11 +95,6 @@ class App extends Component {
     this.setState({
       data: data.filter((item) => item.id !== id),
     });
-  }
-
-  updated() {
-    const { data } = this.state;
-    localstorage.set("data", data);
   }
 
   changeTheme() {
