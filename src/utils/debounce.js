@@ -1,5 +1,6 @@
 const debounce = (cb, timeout = 300) => {
   let timer;
+
   return (...args) => {
     clearTimeout(timer);
     timer = setTimeout(() => {

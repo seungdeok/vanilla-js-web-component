@@ -1,4 +1,5 @@
 import Component from "../core/Component.js";
+import debounce from "../utils/debounce.js";
 
 class Input extends Component {
   template() {
@@ -11,11 +12,17 @@ class Input extends Component {
     const { onkeyup, onchange } = this.props;
     const textInput = document.querySelector(".input");
 
+    const debouncedOnChange = debounce((value) => {
+      onchange(value);
+    });
+
     textInput.addEventListener(
       "keyup",
       ({ key, target }) => {
         if (key === "Enter") onkeyup();
-        else onchange(target.value);
+        else {
+          debouncedOnChange(target.value);
+        }
       },
       false
     );
