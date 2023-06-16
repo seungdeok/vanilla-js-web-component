@@ -5,10 +5,10 @@ import Button from "./Button.js";
 class InputForm extends Component {
   template() {
     return `
-      <div>
+      <form>
         <div class="input-wrap"></div>
         <div class="button-wrap"></div>
-      </div>
+      </form>
     `;
   }
 
