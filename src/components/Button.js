@@ -4,7 +4,7 @@ class Button extends Component {
   template() {
     const { label, id } = this.props;
     return `
-      <button type="button" class="button_${id}">
+      <button type="submit" class="button_${id}">
         ${label}
       </button>
     `;
@@ -20,13 +20,13 @@ class Button extends Component {
     const { id } = this.props;
     const labelButton = document.querySelector(`.button_${id}`);
 
-    labelButton.addEventListener("click", (e) => this.handleClick(e), false);
+    labelButton.addEventListener("submit", (e) => this.handleClick(e), false);
   }
 
   unmount() {
     const { id } = this.props;
     const labelButton = document.querySelector(`.button_${id}`);
-    labelButton.removeEventListener("click", (e) => this.handleClick(e));
+    labelButton.removeEventListener("submit", (e) => this.handleClick(e));
   }
 }
 
